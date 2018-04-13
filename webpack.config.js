@@ -1,7 +1,8 @@
+const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const path = require("path");
+const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
 
 const template = "./src/index.html";
 
@@ -19,7 +20,7 @@ const config = {
         ]
     },
     output: {
-        path: path.resolve(__dirname, "dist"),
+        path: path.resolve(__dirname, "./dist"),
         filename: "[name].[hash].js"
     },
     module: {
@@ -57,31 +58,33 @@ const config = {
             }
         ]
     },
-    // optimization: {
-    //     runtimeChunk: 'single',
-    //     splitChunks: {
-    //         chunks: 'all',
-    //         cacheGroups: {
-    //             default: {
-    //                 priority: 1,
-    //                 enforce: true
-    //             },
-    //             vendors: {
-    //                 priority: 2,
-    //                 test: /[\\/]node_modules[\\/]/,
-    //                 name: 'vendors',
-    //                 enforce: true,
-    //                 chunks: 'all'
-    //             }
-    //         }
-    //     }
-    // },
+    optimization: {
+        runtimeChunk: 'single',
+        splitChunks: {
+            chunks: 'all',
+            minChunks: 1,
+            cacheGroups: {
+                default: {
+                    priority: 1,
+                    enforce: true
+                },
+                vendors: {
+                    priority: 2,
+                    test: /[\\/]node_modules[\\/]/,
+                    name: 'vendors',
+                    enforce: true,
+                    chunks: 'all'
+                }
+            }
+        }
+    },
     plugins: [
-        // new UglifyJSPlugin(),
+        new UglifyJSPlugin({
+            sourceMap: true
+        }),
         new HtmlWebpackPlugin({
             template: template,
             filename: 'index.html',
-            chunks: ["vendor", "main"],
             hash: true,
             title: "React Component"
         }),

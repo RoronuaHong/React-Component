@@ -10,14 +10,7 @@ const config = {
     mode: "development",
     devtool: 'cheap-eval-source-map',
     entry: {
-        main: "./src/index.js",
-        vendor: [
-            "react",
-            "react-dom",
-            "redux",
-            "react-redux",
-            "react-router-dom"
-        ]
+        main: "./src/index.js"
     },
     output: {
         path: path.resolve(__dirname, "./dist"),
@@ -61,12 +54,17 @@ const config = {
     optimization: {
         runtimeChunk: 'single',
         splitChunks: {
+            name: true,
             chunks: 'all',
             minChunks: 1,
+            maxAsyncRequests: 5,
+            maxInitialRequests: 3,
+            automaticNameDelimiter: '-',
             cacheGroups: {
                 default: {
                     priority: 1,
-                    enforce: true
+                    enforce: true,
+                    reuseExistingChunk: true
                 },
                 vendors: {
                     priority: 2,
@@ -90,7 +88,7 @@ const config = {
         }),
         new ExtractTextPlugin({
             filename: 'main.[hash].css',
-            allChunks: true,
+            allChunks: true
         }),
         new webpack.HotModuleReplacementPlugin()
     ],

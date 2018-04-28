@@ -28,6 +28,7 @@ const config = {
             },
             {
                 test: /\.(css|scss)$/,
+                exclude: /node_modules/, 
                 use: [
                     {
                         loader: "style-loader"
@@ -136,6 +137,7 @@ const config = {
         port: "7777",
         inline: true,   //实时刷新
         hot: true,
+        host: "0.0.0.0",
         compress: true,
         historyApiFallback: {
             index: '/pa/index.html'

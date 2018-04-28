@@ -1,9 +1,9 @@
 import React from "react";
 import Tab from "../components/tab";
-import Calculator from "../components/calculator";
+import Calendar from "../components/calendar";
 
 const App = () => (
-    <Calculator />
+    <Calendar />
 );
 
 export default App;

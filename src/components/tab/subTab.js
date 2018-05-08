@@ -1,49 +1,87 @@
 import React, { Component } from "react";
 
-class SubTab extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            currentIndex: this.props.initialIndex
-        }
-    }
+// class SubTab extends Component {
+//     constructor(props) {
+//         super(props);
+//         this.state = {
+//             currentIndex: this.props.initialIndex
+//         }
+//     }
 
-    render() {
+//     render() {
+//         console.log(this.props.children)
+//         return(
+//             <React.Fragment>
+//                 <ul className="tabTitle">
+//                     {
+//                         this.props.children.map((item, index) => (
+//                             <li
+//                                 key={ index }
+//                                 onClick={() => 
+//                                     this.setState({ currentIndex: index })
+//                                 }
+//                             >
+//                                 { item.props.name }
+//                             </li>
+//                         ))
+//                     }
+//                 </ul>
+//                 <div className="content">
+//                     {
+//                         this.props.children.map((item, index) => (
+//                             <div 
+//                                 className="con"
+//                                 key={ index }
+//                                 style={{
+//                                     display: this.state.currentIndex === index ? "block" : "none"
+//                                 }}
+//                             >
+//                                 { item }
+//                             </div>
+//                         ))
+//                     }
+//                 </div>
+//             </React.Fragment>
+//         )
+//     }
+// }
 
-        return(
-            <React.Fragment>
-                <ul className="tabTitle">
-                    {
-                        this.props.children.map((item, index) => (
+const SubTab = props => {
+    return (
+        <React.Fragment>
+            <ul className="tabTitle">
+                {
+                    props.children.map((item, index) => {
+                        return(
                             <li
-                                key={ index }
-                                onClick={() => 
-                                    this.setState({ currentIndex: index })
-                                }
+                                key={index}
+                                onClick={() => props.changeCurrentIndex(index) }
                             >
-                                { item.props.name }
+                                {item.props.name}
                             </li>
-                        ))
-                    }
-                </ul>
-                <div className="content">
-                    {
-                        this.props.children.map((item, index) => (
-                            <div 
+                        ) 
+                    })
+                }
+            </ul>
+            <div className="content">
+                {
+                    props.children.map((item, index) => {
+                        return(
+                            <div
                                 className="con"
-                                key={ index }
+                                key={index}
                                 style={{
-                                    display: this.state.currentIndex === index ? "block" : "none"
+                                    display: props.currentIndex === index ? "block" : "none"
                                 }}
                             >
-                                { item }
+                                {item.props.children}
                             </div>
-                        ))
-                    }
-                </div>
-            </React.Fragment>
-        )
-    }
+                        )
+                    })
+                }
+            </div>
+        </React.Fragment>
+    )
 }
 
 export default SubTab;

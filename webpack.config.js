@@ -8,7 +8,6 @@ const template = "./src/index.html";
 
 const config = {
     mode: "development",
-    devtool: 'cheap-eval-source-map',
     entry: {
         main: "./src/index.js"
     },
@@ -119,7 +118,7 @@ const config = {
     },
     plugins: [
         new UglifyJSPlugin({
-            sourceMap: true
+            
         }),
         new HtmlWebpackPlugin({
             template: template,

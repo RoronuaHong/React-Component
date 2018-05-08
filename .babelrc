@@ -4,6 +4,9 @@
         "react"
     ],
     "plugins": [
-        "react-hot-loader/babel"
+        "react-hot-loader/babel",
+        "transform-object-rest-spread",
+        "transform-decorators-legacy",
+        "transform-es2015-classes"
     ]
 }

@@ -3,8 +3,8 @@ import Tab from "../components/tab";
 import Calendar from "../components/calendar";
 
 const App = () => (
-    // <Calendar />
-    <Tab />
+    <Calendar />
+    // <Tab />
 );
 
 export default App;
